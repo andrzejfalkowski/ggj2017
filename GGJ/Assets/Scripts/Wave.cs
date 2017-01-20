@@ -61,6 +61,7 @@ public class Wave : MonoBehaviour
 	{
 		float collidingRangeFromCenter = ((Vector2)colliding.transform.localPosition - centerPos).magnitude;
 
+		//Debug.Log("collidingRangeFromCenter " + collidingRangeFromCenter);
 		return ((collidingRangeFromCenter > WORLD_MAX_RANGE * (currentRange/MAX_RANGE) - WORLD_COLLISION_BUFFER) &&
 		        (collidingRangeFromCenter < WORLD_MAX_RANGE * (currentRange/MAX_RANGE) + WORLD_COLLISION_BUFFER));
 	}

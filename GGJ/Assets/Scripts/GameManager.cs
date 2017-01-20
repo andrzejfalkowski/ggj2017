@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 		this.gameObject.GetComponent<WavesManager>().Init();
 	}
 
-	void Update () 
+	void Update() 
 	{
 		// check for collisions
 		for(int i = 0; i < ShipsManager.Instance.Ships.Count; i++)
@@ -25,7 +25,10 @@ public class GameManager : MonoBehaviour
 			for(int j = 0; j < WavesManager.Instance.Waves.Count; j++)
 			{
 				if(WavesManager.Instance.Waves[j].IsCollidingWith(ShipsManager.Instance.Ships[i].gameObject))
+				{
+					//Debug.Log("Hit!");
 					ShipsManager.Instance.Ships[i].HittingWaves++;
+				}
 			}
 			if(ShipsManager.Instance.Ships[i].HittingWaves > 1)
 				ShipsManager.Instance.Ships[i].Kill();

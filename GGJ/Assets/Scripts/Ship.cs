@@ -23,6 +23,8 @@ public class Ship : MonoBehaviour
 		targetAngle = this.transform.localEulerAngles.z + changeAngle;
 
 		turningLeft = (Mathf.Sign(targetAngle) == 1);
+
+		ShipsManager.Instance.Ships.Add(this);
 	}
 
 	public void Update()
