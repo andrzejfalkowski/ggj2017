@@ -26,3 +26,5 @@ obj/
 *.booproj
 *.csproj
 *.sln
+GGJ/ProjectSettings/ClusterInputManager.asset
+GGJ/ProjectSettings/UnityConnectSettings.asset
