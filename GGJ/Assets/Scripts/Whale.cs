@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Whale : MonoBehaviour 
@@ -11,6 +12,11 @@ public class Whale : MonoBehaviour
 	const float MAX_SPEED = 0.05f;
 
 	float currentSpeed = 0f;
+
+	[SerializeField]
+	Image powerBar;
+	float currentPowerLevel = 1f;
+	const float WAVE_LOAD_TIME = 1f; 
 
 	public void Init()
 	{
@@ -47,9 +53,16 @@ public class Whale : MonoBehaviour
 		Vector3 pos = this.transform.localPosition + translation;
 		this.transform.localPosition = pos;
 
-		if(left ? Input.GetKeyDown(KeyCode.Space) : Input.GetKeyDown(KeyCode.Return))
+		if(currentPowerLevel >= 1f && (left ? Input.GetKeyDown(KeyCode.Space) : Input.GetKeyDown(KeyCode.Return)))
 		{
 			WavesManager.Instance.GenerateWave(this.transform.localPosition);
+
+			currentPowerLevel = 0f;
 		}
+
+		if(currentPowerLevel < 1f)
+			currentPowerLevel += Time.deltaTime / WAVE_LOAD_TIME;
+
+		powerBar.fillAmount = currentPowerLevel;
 	}
 }
