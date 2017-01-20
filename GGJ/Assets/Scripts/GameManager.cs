@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
 
 	void Awake () 
 	{
+		QualitySettings.vSyncCount = 0;
+		Application.targetFrameRate = 30;
+
 		Instance = this;
 
 		this.gameObject.GetComponent<ShipsManager>().Init();
@@ -15,6 +18,17 @@ public class GameManager : MonoBehaviour
 
 	void Update () 
 	{
-	
+		// check for collisions
+		for(int i = 0; i < ShipsManager.Instance.Ships.Count; i++)
+		{
+			ShipsManager.Instance.Ships[i].HittingWaves = 0;
+			for(int j = 0; j < WavesManager.Instance.Waves.Count; j++)
+			{
+				if(WavesManager.Instance.Waves[j].IsCollidingWith(ShipsManager.Instance.Ships[i].gameObject))
+					ShipsManager.Instance.Ships[i].HittingWaves++;
+			}
+			if(ShipsManager.Instance.Ships[i].HittingWaves > 1)
+				ShipsManager.Instance.Ships[i].Kill();
+		}
 	}
 }

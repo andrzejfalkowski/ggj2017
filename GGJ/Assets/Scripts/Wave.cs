@@ -13,6 +13,9 @@ public class Wave : MonoBehaviour
 	const float GROW_SPEED = 30f;
 	const float MAX_RANGE = 100f;
 
+	const float WORLD_MAX_RANGE = 5.12f;
+	const float WORLD_COLLISION_BUFFER = 0.5f;
+
 	private bool initialized = false;
 
 	public void Init(Vector2 pos) 
@@ -54,4 +57,11 @@ public class Wave : MonoBehaviour
 		}
 	}
 
+	public bool IsCollidingWith(GameObject colliding)
+	{
+		float collidingRangeFromCenter = ((Vector2)colliding.transform.localPosition - centerPos).magnitude;
+
+		return ((collidingRangeFromCenter > WORLD_MAX_RANGE * (currentRange/MAX_RANGE) - WORLD_COLLISION_BUFFER) &&
+		        (collidingRangeFromCenter < WORLD_MAX_RANGE * (currentRange/MAX_RANGE) + WORLD_COLLISION_BUFFER));
+	}
 }

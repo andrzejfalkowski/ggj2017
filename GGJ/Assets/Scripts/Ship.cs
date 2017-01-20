@@ -14,6 +14,9 @@ public class Ship : MonoBehaviour
 	float changeAngle = 0f;
 	bool turningLeft = true;
 
+	[HideInInspector]
+	public int HittingWaves = 0;
+
 	public void Init(Vector3 pos) 
 	{
 		changeAngle = UnityEngine.Random.Range(-MAX_ANGLE, MAX_ANGLE);
@@ -36,6 +39,12 @@ public class Ship : MonoBehaviour
 		
 		Vector3 pos = this.transform.localPosition + translation;
 		this.transform.localPosition = pos;
+	}
+
+	public void Kill()
+	{
+		GameObject.Destroy(this.gameObject);
+		// increase score
 	}
 
 	void OnDestroy()
