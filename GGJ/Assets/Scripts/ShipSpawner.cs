@@ -1,15 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ShipSpawner : MonoBehaviour {
+public class ShipSpawner : MonoBehaviour 
+{
+	float timer = 0f;
 
-	// Use this for initialization
-	void Start () {
+	[SerializeField]
+	float minDelay = 3f;
+	[SerializeField]
+	float maxDelay = 8f;
 	
+	void Start () 
+	{
+		SetNextDelay();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	void Update () 
+	{
+		timer -= Time.deltaTime;
+
+		if(timer < 0f)
+		{
+			ShipsManager.Instance.GenerateShip(this.transform.localPosition, this.transform.localEulerAngles);
+
+			SetNextDelay();
+		}
+
+	}
+
+	void SetNextDelay()
+	{
+		timer += UnityEngine.Random.Range(minDelay, maxDelay);
 	}
 }

@@ -35,6 +35,8 @@ public class Wave : MonoBehaviour
 
 		waveSprite.transform.localScale = new Vector3(currentRange/MAX_RANGE, currentRange/MAX_RANGE, 1f);
 
+		waveSprite.color = new Color(1f, 1f, 1f, 1f - (10f * (currentRange/MAX_RANGE) - 9f));
+
 		if (currentRange > MAX_RANGE) 
 		{
 			GameObject.Destroy(this.gameObject);
