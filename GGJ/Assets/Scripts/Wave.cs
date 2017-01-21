@@ -10,10 +10,10 @@ public class Wave : MonoBehaviour
 
 	float currentRange = 0f;
 
-	const float GROW_SPEED = 30f;
+	const float GROW_SPEED = 50f;
 	const float MAX_RANGE = 100f;
 
-	const float WORLD_MAX_RANGE = 5.12f;
+	const float WORLD_MAX_RANGE = 4f;
 	const float WORLD_COLLISION_BUFFER = 0.5f;
 
 	private bool initialized = false;
