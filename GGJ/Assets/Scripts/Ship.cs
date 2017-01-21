@@ -56,6 +56,8 @@ public class Ship : MonoBehaviour
 
 		sinking = true;
 
+		GameManager.Instance.IncreaseScore();
+
 		this.GetComponent<AudioSource>().Play();
 
 		this.transform.DOScale(new Vector3(0.4f, 0f, 1f), 5f);

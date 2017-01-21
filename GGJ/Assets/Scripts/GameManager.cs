@@ -1,10 +1,19 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour 
 {
 	public static GameManager Instance;
+
+	[SerializeField]
+	Text ScoreLabel;
+	public int Score = 0;
+
+	[SerializeField]
+	Text LivesLabel;
+	public int Lives = 5;
 
 	void Awake () 
 	{
@@ -18,10 +27,25 @@ public class GameManager : MonoBehaviour
 
 	public void Init()
 	{
+		Score = 0;
+		Lives = 5;
+
 		this.gameObject.GetComponent<ShipsManager>().Init();
 		this.gameObject.GetComponent<WavesManager>().Init();
 	}
 
+	public void IncreaseScore()
+	{
+		Score++;
+		ScoreLabel.text = "Score: " + Score.ToString();
+	}
+
+	public void DecreaseLives()
+	{
+		Lives--;
+		LivesLabel.text = "Credits: " + Score.ToString();
+	}
+	
 	void Update() 
 	{
 		// check for collisions
