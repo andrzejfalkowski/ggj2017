@@ -109,7 +109,7 @@ public class DialogueManager : MonoBehaviour
 
 				whale1Box.SetActive(true);
 				whale1Message.gameObject.SetActive(true);
-				whale1Box.GetComponent<RectTransform>().DOMoveX(-512f, 1f).From().SetId("dialogue");
+				whale1Box.GetComponent<RectTransform>().DOMoveX(-128f, 0.5f).From().SetId("dialogue");
 				break;
 			case 3:
 			case 5:
@@ -119,7 +119,7 @@ public class DialogueManager : MonoBehaviour
 
 				whale2Box.SetActive(true);
 				whale2Message.gameObject.SetActive(true);
-				whale2Box.GetComponent<RectTransform>().DOMoveX(512f, 1f).From().SetId("dialogue");
+				whale2Box.GetComponent<RectTransform>().DOMoveX(128f, 0.5f).From().SetId("dialogue");
 				break;
 		}
 		if(currentMessage == 8)
