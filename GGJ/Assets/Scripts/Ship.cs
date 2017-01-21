@@ -36,13 +36,16 @@ public class Ship : MonoBehaviour
 		DOVirtual.DelayedCall(UnityEngine.Random.Range(10f, 15f), 
 		()=> 
 		{ 
-			if(this.gameObject != null)
+			if(this != null && this.gameObject != null)
 				goingForIsland = true;
 		});
 	}
 
 	public void Update()
 	{
+		if(!GameManager.Instance.Started || GameManager.Instance.GameOver)
+			return;
+		
 		if(fading || sinking)
 			return;
 

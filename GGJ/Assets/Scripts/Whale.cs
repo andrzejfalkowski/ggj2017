@@ -28,7 +28,7 @@ public class Whale : MonoBehaviour
 
 	public void Update()
 	{
-		if(!GameManager.Instance.Started)
+		if(!GameManager.Instance.Started || GameManager.Instance.GameOver)
 			return;
 
 		if(left ? Input.GetKey(KeyCode.A) : Input.GetKey(KeyCode.LeftArrow))

@@ -21,6 +21,9 @@ public class ShipSpawner : MonoBehaviour
 
 	void Update () 
 	{
+		if(!GameManager.Instance.Started || GameManager.Instance.GameOver)
+			return;
+
 		if(!initialized)
 			return;
 

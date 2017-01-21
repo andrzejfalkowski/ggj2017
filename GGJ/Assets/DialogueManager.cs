@@ -139,7 +139,7 @@ public class DialogueManager : MonoBehaviour
 		if(storyFinished)
 			return;
 
-		if(Input.GetKeyDown(KeyCode.Return))
+		if(Input.anyKeyDown)
 		{
 			ShowNextMessage();
 		}
