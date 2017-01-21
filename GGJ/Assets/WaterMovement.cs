@@ -20,7 +20,7 @@ public class WaterMovement : MonoBehaviour
 		pos.y = pos.y + (moveBack ? -Time.deltaTime : Time.deltaTime) * SPEED;
 		this.transform.localPosition = pos;
 
-		this.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f * (pos.x + MAX_CHANGE));
+		this.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.6f * (pos.x + MAX_CHANGE));
 
 		if(!moveBack && pos.x > MAX_CHANGE)
 			moveBack = true;
