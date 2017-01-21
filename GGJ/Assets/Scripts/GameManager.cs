@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 	Text LivesLabel;
 	public int Lives = 5;
 
+	public bool Started = false;
+
 	void Awake () 
 	{
 		QualitySettings.vSyncCount = 0;
@@ -22,7 +24,9 @@ public class GameManager : MonoBehaviour
 
 		Instance = this;
 
-		Init();
+		//Init();
+
+		this.gameObject.GetComponent<DialogueManager>().Init();
 	}
 
 	public void Init()
@@ -32,6 +36,8 @@ public class GameManager : MonoBehaviour
 
 		this.gameObject.GetComponent<ShipsManager>().Init();
 		this.gameObject.GetComponent<WavesManager>().Init();
+
+		Started = true;
 	}
 
 	public void IncreaseScore()
@@ -48,6 +54,9 @@ public class GameManager : MonoBehaviour
 	
 	void Update() 
 	{
+		if(!Started)
+			return;
+
 		// check for collisions
 		for(int i = 0; i < ShipsManager.Instance.Ships.Count; i++)
 		{

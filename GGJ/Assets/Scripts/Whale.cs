@@ -28,6 +28,9 @@ public class Whale : MonoBehaviour
 
 	public void Update()
 	{
+		if(!GameManager.Instance.Started)
+			return;
+
 		if(left ? Input.GetKey(KeyCode.A) : Input.GetKey(KeyCode.LeftArrow))
 		{
 			Vector3 rot = this.transform.localEulerAngles;
