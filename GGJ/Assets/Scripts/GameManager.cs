@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
 	public static GameManager Instance;
 
+	public Island IslandObject;
+
 	[SerializeField]
 	Text ScoreLabel;
 	public int Score = 0;

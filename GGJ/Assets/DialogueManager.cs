@@ -58,7 +58,7 @@ public class DialogueManager : MonoBehaviour
 
 	public void ShowMessage(int message)
 	{
-		Debug.Log("ShowMessage " + message);
+		//Debug.Log("ShowMessage " + message);
 
 		currentMessage = message;
 

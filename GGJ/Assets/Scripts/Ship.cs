@@ -9,6 +9,7 @@ public class Ship : MonoBehaviour
 	const float MAX_SPEED = 0.03f;
 
 	const float ROTATION_SPEED = 0.005f;
+	const float ISLAND_ROTATION_SPEED = 1f;
 
 	const float MAX_ANGLE = 45f;
 	float targetAngle = 0f;
@@ -16,6 +17,9 @@ public class Ship : MonoBehaviour
 	bool turningLeft = true;
 
 	bool sinking = false;
+	bool fading = false;
+
+	bool goingForIsland = false;
 
 	[HideInInspector]
 	public int HittingWaves = 0;
@@ -28,6 +32,13 @@ public class Ship : MonoBehaviour
 		turningLeft = (Mathf.Sign(targetAngle) == 1);
 
 		ShipsManager.Instance.Ships.Add(this);
+
+		DOVirtual.DelayedCall(UnityEngine.Random.Range(10f, 15f), 
+		()=> 
+		{ 
+			if(this.gameObject != null)
+				goingForIsland = true;
+		});
 	}
 
 	public void Update()
@@ -35,11 +46,21 @@ public class Ship : MonoBehaviour
 		if(sinking)
 			return;
 
-		Vector3 rot = this.transform.localEulerAngles;
-		if(Mathf.Abs(targetAngle - rot.z) > 1f)
-		{	
-			rot.z = rot.z + changeAngle * ROTATION_SPEED;
-			this.transform.localEulerAngles = rot;
+		if(!goingForIsland)
+		{
+			Vector3 rot = this.transform.localEulerAngles;
+			if(Mathf.Abs(targetAngle - rot.z) > 1f)
+			{	
+				rot.z = rot.z + changeAngle * ROTATION_SPEED;
+				this.transform.localEulerAngles = rot;
+			}
+		}
+		else
+		{
+			Vector3 vectorToTarget = GameManager.Instance.IslandObject.transform.position - transform.position;
+			float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90f;
+			Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+			transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * ISLAND_ROTATION_SPEED);
 		}
 
 		Vector3 translation = new Vector3(0f, MAX_SPEED, 0f);
