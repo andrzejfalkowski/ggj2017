@@ -4,9 +4,9 @@ using DG.Tweening;
 
 public class Ship : MonoBehaviour 
 {
-	float speed = 5f;
+	float speed = 3f;
 
-	const float MAX_SPEED = 0.05f;
+	const float MAX_SPEED = 0.03f;
 
 	const float ROTATION_SPEED = 0.005f;
 
