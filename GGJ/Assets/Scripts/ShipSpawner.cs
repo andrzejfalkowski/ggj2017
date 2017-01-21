@@ -9,14 +9,21 @@ public class ShipSpawner : MonoBehaviour
 	float minDelay = 3f;
 	[SerializeField]
 	float maxDelay = 8f;
-	
-	void Start () 
+
+	bool initialized = false;
+
+	public void Init () 
 	{
+		initialized = true;
+
 		SetNextDelay();
 	}
 
 	void Update () 
 	{
+		if(!initialized)
+			return;
+
 		timer -= Time.deltaTime;
 
 		if(timer < 0f)

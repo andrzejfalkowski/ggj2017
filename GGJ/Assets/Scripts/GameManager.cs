@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour 
 {
@@ -12,6 +13,11 @@ public class GameManager : MonoBehaviour
 
 		Instance = this;
 
+		Init();
+	}
+
+	public void Init()
+	{
 		this.gameObject.GetComponent<ShipsManager>().Init();
 		this.gameObject.GetComponent<WavesManager>().Init();
 	}

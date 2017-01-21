@@ -8,6 +8,8 @@ public class ShipsManager : MonoBehaviour
 
 	[SerializeField]
 	Transform shipsParent;
+	[SerializeField]
+	List<ShipSpawner> shipSpawners;
 
 	public GameObject ShipPrefab;
 	
@@ -18,6 +20,11 @@ public class ShipsManager : MonoBehaviour
 		Instance = this;
 		
 		Ships = new List<Ship>();
+
+		for(int i = 0; i < shipSpawners.Count; i++)
+		{
+			shipSpawners[i].Init();
+		}
 	}
 	
 	public void GenerateShip(Vector3 pos, Vector3 rot) 
