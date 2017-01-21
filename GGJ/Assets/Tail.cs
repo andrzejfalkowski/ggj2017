@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Tail : MonoBehaviour 
 {
-	const float MAX_CHANGE = 35f;
+	const float MAX_CHANGE = 25f;
 	const float ROT_SPEED = 100f;
 	const float ROT_BACK_SPEED = 60f;
 	bool moveLeft = false;
