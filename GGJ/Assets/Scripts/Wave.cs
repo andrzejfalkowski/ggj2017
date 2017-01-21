@@ -17,6 +17,7 @@ public class Wave : MonoBehaviour
 	const float WORLD_COLLISION_BUFFER = 0.5f;
 
 	private bool initialized = false;
+    private Color startingColor;
 
 	public void Init(Vector2 pos) 
 	{
@@ -27,6 +28,7 @@ public class Wave : MonoBehaviour
 		waveSprite.transform.localScale = new Vector3(0f, 0f, 1f);
 
 		WavesManager.Instance.Waves.Add(this);
+        startingColor = waveSprite.color;
 	}
 
 	void Update () 
@@ -37,8 +39,8 @@ public class Wave : MonoBehaviour
 		currentRange += Time.deltaTime * GROW_SPEED;
 
 		waveSprite.transform.localScale = new Vector3(currentRange/MAX_RANGE, currentRange/MAX_RANGE, 1f);
-
-		waveSprite.color = new Color(1f, 1f, 1f, 1f - (10f * (currentRange/MAX_RANGE) - 9f));
+		waveSprite.color = new Color(startingColor.r, startingColor.g, startingColor.b,
+        startingColor.a * Mathf.Min(1f, (1f - (10f * (currentRange/MAX_RANGE) - 9f))));
 
 		if (currentRange > MAX_RANGE) 
 		{
