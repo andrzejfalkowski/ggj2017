@@ -51,6 +51,9 @@ public class Whale : MonoBehaviour
 		translation = Quaternion.Euler(this.transform.localEulerAngles) * translation;
 
 		Vector3 pos = this.transform.localPosition + translation;
+		Vector3 screenPos = Camera.main.WorldToViewportPoint(pos);
+		if(screenPos.x < 0f || screenPos.x > 1f || screenPos.y < 0f || screenPos.y > 1f)
+			pos -= translation;
 		this.transform.localPosition = pos;
 
 		if(currentPowerLevel >= 1f && (left ? Input.GetKeyDown(KeyCode.Space) : Input.GetKeyDown(KeyCode.Return)))
