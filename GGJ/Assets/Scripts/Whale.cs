@@ -7,16 +7,16 @@ public class Whale : MonoBehaviour
 	public bool left = true;
 
 	const float ROTATION_SPEED = 2f;
-	const float ACCELERATION = 0.002f;
+	public float acceleration = 0.002f;
 	const float SPEED_DROP = 0.0005f;
-	const float MAX_SPEED = 0.05f;
+	public float maxSpeed = 0.05f;
 
 	float currentSpeed = 0f;
 
 	[SerializeField]
 	Image powerBar;
 	float currentPowerLevel = 1f;
-	const float WAVE_LOAD_TIME = 1f; 
+	public float WaveLoadTime = 1f; 
 
 	[SerializeField]
 	Tail tail;
@@ -50,7 +50,7 @@ public class Whale : MonoBehaviour
 
 		if(left ? Input.GetKey(KeyCode.W) :  Input.GetKey(KeyCode.UpArrow))
 		{
-			currentSpeed = Mathf.Min(currentSpeed + ACCELERATION, MAX_SPEED);
+			currentSpeed = Mathf.Min(currentSpeed + acceleration, maxSpeed);
 		}
 		else
 		{
@@ -81,7 +81,7 @@ public class Whale : MonoBehaviour
 		}
 
 		if(currentPowerLevel < 1f)
-			currentPowerLevel += Time.deltaTime / WAVE_LOAD_TIME;
+			currentPowerLevel += Time.deltaTime / WaveLoadTime;
 
 		powerBar.fillAmount = currentPowerLevel;
 	}
