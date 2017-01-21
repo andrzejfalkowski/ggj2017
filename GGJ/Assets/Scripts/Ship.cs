@@ -6,7 +6,7 @@ public class Ship : MonoBehaviour
 {
 	float speed = 3f;
 
-	const float MAX_SPEED = 0.02f;
+	const float MAX_SPEED = 0.01f;
 
 	const float ROTATION_SPEED = 0.005f;
 	const float ISLAND_ROTATION_SPEED = 1f;
