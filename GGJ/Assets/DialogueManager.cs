@@ -76,25 +76,25 @@ public class DialogueManager : MonoBehaviour
 		switch(currentMessage)
 		{
 		case 1:
-			whale1Message.DOText("Cousin Dick said it happened over here.", "Cousin Dick said it happened over here.".Length * 0.03f).SetDelay(1f).SetId("dialogue");
+			whale1Message.DOText("Cousin Dick said it happened over here.", "Cousin Dick said it happened over here.".Length * 0.03f).SetDelay(0.3f).SetId("dialogue");
 			break;
 		case 2:
-			whale1Message.DOText("Some psycho chased him for days and then stabbed him with giant harpoon.", "Some psycho chased him for days and then stabbed him with giant harpoon.".Length * 0.03f).SetDelay(1f).SetId("dialogue");
+			whale1Message.DOText("Some psycho chased him for days and then stabbed him with giant harpoon.", "Some psycho chased him for days and then stabbed him with giant harpoon.".Length * 0.03f).SetDelay(0.3f).SetId("dialogue");
 			break;
 		case 3:
-			whale2Message.DOText("Bro, that's not cool. Humans are mental.", "Bro, that's not cool. Humans are mental.".Length * 0.03f).SetDelay(1f).SetId("dialogue");
+			whale2Message.DOText("Bro, that's not cool. Humans are mental.", "Bro, that's not cool. Humans are mental.".Length * 0.03f).SetDelay(0.3f).SetId("dialogue");
 			break;
 		case 4:
-			whale1Message.DOText("We have to show them this ocean is not big enough for both our species.", "We have to show them this ocean is not big enough for both our species.".Length * 0.03f).SetDelay(1f).SetId("dialogue");
+			whale1Message.DOText("We have to show them this ocean is not big enough for both our species.", "We have to show them this ocean is not big enough for both our species.".Length * 0.03f).SetDelay(0.3f).SetId("dialogue");
 			break;
 		case 5:
-			whale2Message.DOText("But bro! Their boats are pretty sturdy.", "But bro! Their boats are pretty sturdy.".Length * 0.03f).SetDelay(1f).SetId("dialogue");
+			whale2Message.DOText("But bro! Their boats are pretty sturdy.", "But bro! Their boats are pretty sturdy.".Length * 0.03f).SetDelay(0.3f).SetId("dialogue");
 			break;
 		case 6:
-			whale1Message.DOText("If we cooperate, we can synchronize our waves and blow them out of the water.", "If we cooperate, we can synchronize our waves and blow them out of the water.".Length * 0.03f).SetDelay(1f).SetId("dialogue");
+			whale1Message.DOText("If we cooperate, we can synchronize our waves and blow them out of the water.", "If we cooperate, we can synchronize our waves and blow them out of the water.".Length * 0.03f).SetDelay(0.3f).SetId("dialogue");
 			break;
 		case 7:
-			whale2Message.DOText("Now yer talkin\', bro. Lemme just get my boombox and *whale* get this party started.", "Now yer talkin\', bro. Lemme just get my boombox and *whale* get this party started.".Length * 0.03f).SetDelay(1f).SetId("dialogue");
+			whale2Message.DOText("Now yer talkin\', bro. Lemme just get my boombox and *whale* get this party started.", "Now yer talkin\', bro. Lemme just get my boombox and *whale* get this party started.".Length * 0.03f).SetDelay(0.3f).SetId("dialogue");
 			break;
 		}
 

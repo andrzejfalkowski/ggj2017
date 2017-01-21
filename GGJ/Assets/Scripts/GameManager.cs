@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour 
 {
@@ -16,6 +17,9 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	Text LivesLabel;
 	public int Lives = 5;
+
+	[SerializeField]
+	Text Hint;
 
 	public bool Started = false;
 
@@ -40,6 +44,8 @@ public class GameManager : MonoBehaviour
 		this.gameObject.GetComponent<WavesManager>().Init();
 
 		Started = true;
+
+		ShowHint("Destroy whaler ships before they reach safe port!");
 	}
 
 	public void IncreaseScore()
@@ -48,10 +54,32 @@ public class GameManager : MonoBehaviour
 		ScoreLabel.text = "Score: " + Score.ToString();
 	}
 
+	public void ShowHint(string hint)
+	{
+		Hint.text = hint;
+
+		DOTween.Kill("hint", true);
+
+		Hint.color = new Color(Hint.color.r, Hint.color.g, Hint.color.b, 0f);
+		Hint.DOFade(1f, 0.5f).OnComplete
+		(
+			()=>
+			{
+				Hint.DOFade(0f, 2f).OnComplete
+				(
+					()=>
+					{
+					
+					}
+				).SetDelay(1f).SetId("hint");
+			}
+			).SetId("hint");
+	}
+
 	public void DecreaseLives()
 	{
 		Lives--;
-		LivesLabel.text = "Credits: " + Score.ToString();
+		LivesLabel.text = "Credits: " + Lives.ToString();
 	}
 	
 	void Update() 
@@ -74,5 +102,10 @@ public class GameManager : MonoBehaviour
 			if(ShipsManager.Instance.Ships[i].HittingWaves > 1)
 				ShipsManager.Instance.Ships[i].Kill();
 		}
+	}
+
+	void OnDestroy()
+	{
+		Instance = null;
 	}
 }
