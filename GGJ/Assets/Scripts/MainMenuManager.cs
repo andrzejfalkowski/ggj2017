@@ -12,6 +12,10 @@ public class MainMenuManager : MonoBehaviour {
     [SerializeField]
     private Image flash;
     const float FADE_OUT_TIME = 0.5f;
+    [SerializeField]
+    MainMenuWhale whale1;
+    [SerializeField]
+    MainMenuWhale whale2;
 
     void Update () {
 	    if (Input.anyKeyDown)
@@ -22,6 +26,16 @@ public class MainMenuManager : MonoBehaviour {
 
     public void StartGame()
     {
+        SwitchOffBackgroundAndText();
+        whale1.SwimAway(true);
+        whale2.SwimAway(false);
+
+        //DOVirtual.DelayedCall(2f, () => Application.LoadLevel("Gameplay"));
+    }
+
+    // TV-like effect for switching off the menu.
+    private void SwitchOffBackgroundAndText()
+    {
         DOTween.To(() => texts.alpha, (float alpha) => texts.alpha = alpha, 0f, FADE_OUT_TIME)
             .SetEase(Ease.OutCirc);
         DOTween.To(() => background.localScale,
@@ -31,7 +45,5 @@ public class MainMenuManager : MonoBehaviour {
         DOTween.To(() => texts.transform.localScale,
             (Vector3 scale) => texts.transform.localScale = scale, new Vector3(4f, 0f), FADE_OUT_TIME)
             .SetEase(Ease.OutCirc);
-
-        DOVirtual.DelayedCall(2f, () => Application.LoadLevel("Gameplay"));
     }
 }
