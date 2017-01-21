@@ -13,8 +13,8 @@ public class Wave : MonoBehaviour
 	const float GROW_SPEED = 50f;
 	const float MAX_RANGE = 100f;
 
-	const float WORLD_MAX_RANGE = 4f;
-	const float WORLD_COLLISION_BUFFER = 0.5f;
+	const float WORLD_MAX_RANGE = 2f;
+	const float WORLD_COLLISION_BUFFER = 0.3f;
 
 	private bool initialized = false;
     private Color startingColor;
@@ -63,6 +63,8 @@ public class Wave : MonoBehaviour
 	{
 		float collidingRangeFromCenter = ((Vector2)colliding.transform.localPosition - centerPos).magnitude;
 
+		Debug.DrawLine(centerPos, centerPos + new Vector2(WORLD_MAX_RANGE * (currentRange/MAX_RANGE) - WORLD_COLLISION_BUFFER, 0f));
+		Debug.DrawLine(centerPos, centerPos + new Vector2(0f, WORLD_MAX_RANGE * (currentRange/MAX_RANGE) + WORLD_COLLISION_BUFFER));
 		//Debug.Log("collidingRangeFromCenter " + collidingRangeFromCenter);
 		return ((collidingRangeFromCenter > WORLD_MAX_RANGE * (currentRange/MAX_RANGE) - WORLD_COLLISION_BUFFER) &&
 		        (collidingRangeFromCenter < WORLD_MAX_RANGE * (currentRange/MAX_RANGE) + WORLD_COLLISION_BUFFER));
