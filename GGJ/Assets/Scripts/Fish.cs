@@ -6,21 +6,23 @@ public class Fish : MonoBehaviour {
 
     [SerializeField]
     Fish leader;
-    private Vector3 goal;
-    private float speed = 3f;
-    private Vector3 relationToLeader;
+    protected Vector3 goal;
+    protected float speed = 3f;
+    protected Vector3 relationToLeader;
 
-    private const float SHOAL_DISTANCE = 0.05f;
-    const float MAX_SPEED = 0.03f;
-    const float ROTATION_SPEED = 0.005f;
-    const float ISLAND_ROTATION_SPEED = 1f;
-    const float ISLAND_NO_SWIM_ZONE = 2f;
-    const float SCREEN_RANGE_X = 6.2f;
-    const float SCREEN_RANGE_Y = 4.5f;
-
+    protected const float SHOAL_DISTANCE = 0.05f;
+    protected const float MAX_SPEED = 0.03f;
+    protected const float ISLAND_ROTATION_SPEED = 1f;
+    protected const float SCREEN_RANGE_X = 6.2f;
+    protected const float SCREEN_RANGE_Y = 4.5f;
     const float MAX_ANGLE = 45f;
 
-    private void Awake()
+    protected float rotationSpeed = 0.005f;
+    protected float islandNoGoZone = 2f;
+    protected float minTimeToChangeGoal = 2f;
+    protected float maxTimeToChangeGoal = 5f;
+
+    protected void Awake()
     {
         if (leader != null)
         {
@@ -28,13 +30,14 @@ public class Fish : MonoBehaviour {
         }
         else
         {
-            DOVirtual.DelayedCall(Random.Range(1f, 5f), () => goal = ChooseGoal());
+            DOVirtual.DelayedCall(Random.Range(minTimeToChangeGoal, maxTimeToChangeGoal),
+                () => goal = ChooseGoal());
         }
     }
 
-    private void Update () {
+    protected void Update () {
         if (Mathf.Abs(Vector3.Distance(GameManager.Instance.IslandObject.transform.position,
-                transform.position)) < ISLAND_NO_SWIM_ZONE)
+                transform.position)) < islandNoGoZone)
         {
             goal = 2 * transform.position - GameManager.Instance.IslandObject.transform.position;
                 //ChooseGoal();
@@ -52,16 +55,17 @@ public class Fish : MonoBehaviour {
         Move();
 	}
 
-    private Vector3 ChooseGoal()
+    protected Vector3 ChooseGoal()
     {
-        DOVirtual.DelayedCall(Random.Range(2f, 5f), () => goal = ChooseGoal());
+        DOVirtual.DelayedCall(Random.Range(minTimeToChangeGoal, maxTimeToChangeGoal),
+            () => goal = ChooseGoal());
         return new Vector3(
             Random.Range(-SCREEN_RANGE_X, SCREEN_RANGE_X),
             Random.Range(-SCREEN_RANGE_Y, SCREEN_RANGE_Y),
             0f);
     }
 
-    private void Move()
+    protected void Move()
     {
         Vector3 vectorToTarget = goal - transform.position;
         float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90f;
