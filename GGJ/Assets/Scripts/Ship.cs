@@ -33,7 +33,7 @@ public class Ship : MonoBehaviour
 
 		ShipsManager.Instance.Ships.Add(this);
 
-		DOVirtual.DelayedCall(UnityEngine.Random.Range(10f, 15f), 
+		DOVirtual.DelayedCall(UnityEngine.Random.Range(20f, 35f), 
 		()=> 
 		{ 
 			if(this != null && this.gameObject != null)

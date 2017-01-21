@@ -11,13 +11,16 @@ public class MainMenuManager : MonoBehaviour {
     [SerializeField]
     private Transform background;
     [SerializeField]
-    private Image flash;
+    private SpriteRenderer flash;
     const float FADE_OUT_TIME = 0.5f;
     [SerializeField]
     MainMenuWhale whale1;
     [SerializeField]
     MainMenuWhale whale2;
 
+	[SerializeField]
+	private Text loadingText;
+	
 	[SerializeField]
 	List<Text> highScores;
 
@@ -51,7 +54,7 @@ public class MainMenuManager : MonoBehaviour {
     private void SwitchOffBackgroundAndText()
     {
         DOTween.To(() => texts.alpha, (float alpha) => texts.alpha = alpha, 0f, FADE_OUT_TIME)
-            .SetEase(Ease.OutCirc);
+			.SetEase(Ease.OutCirc).OnComplete(()=>{ loadingText.gameObject.SetActive(true); });
         DOTween.To(() => background.localScale,
             (Vector3 scale) => background.localScale = scale, new Vector3(4f, 0f), FADE_OUT_TIME)
             .SetEase(Ease.OutCirc);
@@ -59,5 +62,5 @@ public class MainMenuManager : MonoBehaviour {
         DOTween.To(() => texts.transform.localScale,
             (Vector3 scale) => texts.transform.localScale = scale, new Vector3(4f, 0f), FADE_OUT_TIME)
             .SetEase(Ease.OutCirc);
-    }
+	}
 }
