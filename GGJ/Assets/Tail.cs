@@ -11,6 +11,8 @@ public class Tail : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		if(!GameManager.Instance.Started || GameManager.Instance.GameOver)
+			return;
 //		Vector3 rot = this.transform.localEulerAngles;
 //		rot.z = rot.z + (moveLeft ? -Time.deltaTime : Time.deltaTime) * SPEED;
 //		this.transform.localEulerAngles = rot;

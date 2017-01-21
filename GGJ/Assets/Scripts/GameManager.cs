@@ -21,7 +21,13 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	Text Hint;
 
+	[SerializeField]
+	GameObject gameOverScreen;
+	[SerializeField]
+	GameObject newHighScoreScreen;
+
 	public bool Started = false;
+	public bool GameOver = false;
 
 	void Awake () 
 	{
@@ -80,11 +86,29 @@ public class GameManager : MonoBehaviour
 	{
 		Lives--;
 		LivesLabel.text = "Credits: " + Lives.ToString();
+
+		if(Lives == 0)
+		{
+			//game over
+			GameOver = true;
+
+			if(Score > PlayerPrefs.GetInt("highscore_1_score", 6) ||
+			   Score > PlayerPrefs.GetInt("highscore_2_score", 3) ||
+				Score > PlayerPrefs.GetInt("highscore_3_score", 1))
+			{
+				newHighScoreScreen.gameObject.SetActive(true);
+			}
+			else
+			{
+				gameOverScreen.gameObject.SetActive(true);
+			}
+
+		}
 	}
 	
 	void Update() 
 	{
-		if(!Started)
+		if(!Started || GameOver)
 			return;
 
 		// check for collisions
