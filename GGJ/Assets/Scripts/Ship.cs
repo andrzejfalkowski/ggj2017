@@ -6,7 +6,7 @@ public class Ship : MonoBehaviour
 {
 	float speed = 3f;
 
-	const float MAX_SPEED = 0.03f;
+	const float MAX_SPEED = 0.02f;
 
 	const float ROTATION_SPEED = 0.005f;
 	const float ISLAND_ROTATION_SPEED = 1f;
@@ -43,7 +43,7 @@ public class Ship : MonoBehaviour
 
 	public void Update()
 	{
-		if(sinking)
+		if(fading || sinking)
 			return;
 
 		if(!goingForIsland)
@@ -72,7 +72,7 @@ public class Ship : MonoBehaviour
 
 	public void Kill()
 	{
-		if(sinking)
+		if(fading || sinking)
 			return;
 
 		sinking = true;
@@ -102,6 +102,27 @@ public class Ship : MonoBehaviour
 			{
 				ShipsManager.Instance.Ships.Remove(this);
 			}
+		}
+	}
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if(fading || sinking)
+			return;
+
+		if(other.gameObject.GetComponent<Island>() != null)
+		{
+			fading = true;
+
+			GameManager.Instance.DecreaseLives();
+
+			this.GetComponentInChildren<SpriteRenderer>().DOFade(0f, 2f)
+				.OnComplete(
+					()=>
+					{
+					if(this.gameObject != null)
+						GameObject.Destroy(this.gameObject);
+				});
 		}
 	}
 }

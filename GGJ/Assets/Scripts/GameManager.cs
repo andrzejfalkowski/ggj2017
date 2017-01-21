@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
 	public void DecreaseLives()
 	{
 		Lives--;
-		LivesLabel.text = "Credits: " + Score.ToString();
+		LivesLabel.text = "Credits: " + Lives.ToString();
 	}
 	
 	void Update() 
