@@ -62,8 +62,15 @@ public class Whale : MonoBehaviour
 
 		Vector3 pos = this.transform.localPosition + translation;
 		Vector3 screenPos = Camera.main.WorldToViewportPoint(pos);
-		if(screenPos.x < 0f || screenPos.x > 1f || screenPos.y < 0f || screenPos.y > 1f)
-			pos -= translation;
+		if(screenPos.x < 0.05f && translation.x < 0f)
+			pos.x -= translation.x;
+		else if(screenPos.x > 0.95f && translation.x > 0f)
+			pos.x -= translation.x;
+		else if(screenPos.y < 0.05f && translation.y < 0f)
+			pos.y -= translation.y;
+		else if(screenPos.y > 0.95f && translation.y > 0f)
+			pos.y -= translation.y;
+
 		this.transform.localPosition = pos;
 
 		if(currentPowerLevel >= 1f && (left ? Input.GetKeyDown(KeyCode.Space) : Input.GetKeyDown(KeyCode.Return)))
