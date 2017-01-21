@@ -30,7 +30,7 @@ public class MainMenuManager : MonoBehaviour {
         whale1.SwimAway(true);
         whale2.SwimAway(false);
 
-        //DOVirtual.DelayedCall(2f, () => Application.LoadLevel("Gameplay"));
+        DOVirtual.DelayedCall(2.2f, () => Application.LoadLevel("Gameplay"));
     }
 
     // TV-like effect for switching off the menu.

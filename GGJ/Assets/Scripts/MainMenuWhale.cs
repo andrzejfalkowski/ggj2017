@@ -22,9 +22,7 @@ public class MainMenuWhale : MonoBehaviour {
         DOTween.To(() => tail.localEulerAngles,
             (Vector3 rotation) => tail.localEulerAngles = rotation,
             new Vector3(0f, 0f, sign * MAX_ROTATION), 0.5f)
-            .OnComplete(() => transform.parent.DORotate(new Vector3(0f, 0f, - sign * 120f),
-                2f, RotateMode.LocalAxisAdd))
-            ;
-        //tail.DORotate(new Vector3(0f, 0f, -MAX_ROTATION), 1f, RotateMode.Fast);
+            .OnComplete(() => transform.parent.DORotate(new Vector3(0f, 0f, -sign * 120f),
+                2f, RotateMode.LocalAxisAdd));
     }
 }
