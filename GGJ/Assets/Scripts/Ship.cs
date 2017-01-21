@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 public class Ship : MonoBehaviour 
 {
@@ -13,6 +14,8 @@ public class Ship : MonoBehaviour
 	float targetAngle = 0f;
 	float changeAngle = 0f;
 	bool turningLeft = true;
+
+	bool sinking = false;
 
 	[HideInInspector]
 	public int HittingWaves = 0;
@@ -29,6 +32,9 @@ public class Ship : MonoBehaviour
 
 	public void Update()
 	{
+		if(sinking)
+			return;
+
 		Vector3 rot = this.transform.localEulerAngles;
 		if(Mathf.Abs(targetAngle - rot.z) > 1f)
 		{	
@@ -45,7 +51,21 @@ public class Ship : MonoBehaviour
 
 	public void Kill()
 	{
-		GameObject.Destroy(this.gameObject);
+		if(sinking)
+			return;
+
+		sinking = true;
+
+		this.transform.DOScale(new Vector3(0f, 0f, 1f), 5f);
+
+		this.GetComponentInChildren<SpriteRenderer>().DOFade(0f, 5f)
+			.OnComplete(
+			()=>
+			{
+				if(this.gameObject != null)
+					GameObject.Destroy(this.gameObject);
+			});
+
 		// increase score
 	}
 
