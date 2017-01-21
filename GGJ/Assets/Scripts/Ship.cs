@@ -56,6 +56,8 @@ public class Ship : MonoBehaviour
 
 		sinking = true;
 
+		this.GetComponent<AudioSource>().Play();
+
 		this.transform.DOScale(new Vector3(0.4f, 0f, 1f), 5f);
 		this.transform.DORotate(new Vector3(0f, 0f, 720f), 5f, RotateMode.FastBeyond360);
 		this.GetComponentInChildren<SpriteRenderer>().DOFade(0f, 5f)

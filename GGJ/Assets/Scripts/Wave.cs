@@ -29,6 +29,8 @@ public class Wave : MonoBehaviour
 
 		WavesManager.Instance.Waves.Add(this);
         startingColor = waveSprite.color;
+
+		this.GetComponent<AudioSource>().Play();
 	}
 
 	void Update () 
