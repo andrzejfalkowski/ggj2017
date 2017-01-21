@@ -18,6 +18,9 @@ public class Whale : MonoBehaviour
 	float currentPowerLevel = 1f;
 	const float WAVE_LOAD_TIME = 1f; 
 
+	[SerializeField]
+	Tail tail;
+
 	public void Init()
 	{
 
@@ -30,12 +33,16 @@ public class Whale : MonoBehaviour
 			Vector3 rot = this.transform.localEulerAngles;
 			rot.z+= ROTATION_SPEED;
 			this.transform.localEulerAngles = rot;
+
+			tail.RotateRight();
 		}
 		else if(left ? Input.GetKey(KeyCode.D) : Input.GetKey(KeyCode.RightArrow))
 		{
 			Vector3 rot = this.transform.localEulerAngles;
 			rot.z -= ROTATION_SPEED;
 			this.transform.localEulerAngles = rot;
+
+			tail.RotateLeft();
 		}
 
 		if(left ? Input.GetKey(KeyCode.W) :  Input.GetKey(KeyCode.UpArrow))
@@ -51,6 +58,9 @@ public class Whale : MonoBehaviour
 		translation = Quaternion.Euler(this.transform.localEulerAngles) * translation;
 
 		Vector3 pos = this.transform.localPosition + translation;
+		Vector3 screenPos = Camera.main.WorldToViewportPoint(pos);
+		if(screenPos.x < 0f || screenPos.x > 1f || screenPos.y < 0f || screenPos.y > 1f)
+			pos -= translation;
 		this.transform.localPosition = pos;
 
 		if(currentPowerLevel >= 1f && (left ? Input.GetKeyDown(KeyCode.Space) : Input.GetKeyDown(KeyCode.Return)))
