@@ -21,6 +21,8 @@ public class Ship : MonoBehaviour
 
 	bool goingForIsland = false;
 
+	public bool SlowedDown = false;
+
 	[HideInInspector]
 	public int HittingWaves = 0;
 
@@ -66,7 +68,7 @@ public class Ship : MonoBehaviour
 			transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * ISLAND_ROTATION_SPEED);
 		}
 
-		Vector3 translation = new Vector3(0f, MAX_SPEED, 0f);
+		Vector3 translation = new Vector3(0f, MAX_SPEED * (SlowedDown ? 0.4f : 1f), 0f);
 		translation = Quaternion.Euler(this.transform.localEulerAngles) * translation;
 		
 		Vector3 pos = this.transform.localPosition + translation;

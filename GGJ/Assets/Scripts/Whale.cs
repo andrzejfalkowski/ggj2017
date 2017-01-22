@@ -88,7 +88,10 @@ public class Whale : MonoBehaviour
 
 		if(currentSpecialLevel >= 1f && (left ? Input.GetKeyDown(KeyCode.T) : Input.GetKeyDown(KeyCode.P)))
 		{
-			WavesManager.Instance.GenerateSpecial(this.transform.localPosition);
+			if(left)
+				WavesManager.Instance.GenerateSpecialSmoke(this.transform.localPosition);
+			else
+				WavesManager.Instance.GenerateSpecialBass(this.transform.localPosition);
 			
 			currentSpecialLevel = 0f;
 		}
