@@ -13,9 +13,13 @@ public class WaterMovement : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
-	{
-		Vector3 pos = this.transform.localPosition;
+	void Update ()
+    {
+        if (GameManager.Instance.paused)
+        {
+            return;
+        }
+        Vector3 pos = this.transform.localPosition;
 		pos.x = pos.x + (moveBack ? -Time.deltaTime : Time.deltaTime) * SPEED;
 		pos.y = pos.y + (moveBack ? -Time.deltaTime : Time.deltaTime) * SPEED;
 		this.transform.localPosition = pos;

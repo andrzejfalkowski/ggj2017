@@ -19,9 +19,13 @@ public class ShipSpawner : MonoBehaviour
 		SetNextDelay();
 	}
 
-	void Update () 
-	{
-		if(!GameManager.Instance.Started || GameManager.Instance.GameOver)
+	void Update ()
+    {
+        if (GameManager.Instance.paused)
+        {
+            return;
+        }
+        if (!GameManager.Instance.Started || GameManager.Instance.GameOver)
 			return;
 
 		if(!initialized)

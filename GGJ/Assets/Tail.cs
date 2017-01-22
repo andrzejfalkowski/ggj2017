@@ -9,9 +9,13 @@ public class Tail : MonoBehaviour
 	bool moveLeft = false;
 
 	// Update is called once per frame
-	void Update () 
-	{
-		if(!GameManager.Instance.Started || GameManager.Instance.GameOver)
+	void Update ()
+    {
+        if (GameManager.Instance.paused)
+        {
+            return;
+        }
+        if (!GameManager.Instance.Started || GameManager.Instance.GameOver)
 			return;
 //		Vector3 rot = this.transform.localEulerAngles;
 //		rot.z = rot.z + (moveLeft ? -Time.deltaTime : Time.deltaTime) * SPEED;

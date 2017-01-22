@@ -42,8 +42,12 @@ public class Ship : MonoBehaviour
 	}
 
 	public void Update()
-	{
-		if(!GameManager.Instance.Started || GameManager.Instance.GameOver)
+    {
+        if (GameManager.Instance.paused)
+        {
+            return;
+        }
+        if (!GameManager.Instance.Started || GameManager.Instance.GameOver)
 			return;
 		
 		if(fading || sinking)

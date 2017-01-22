@@ -36,6 +36,10 @@ public class Fish : MonoBehaviour {
     }
 
     protected void Update () {
+        if (GameManager.Instance.paused)
+        {
+            return;
+        }
         if (Mathf.Abs(Vector3.Distance(GameManager.Instance.IslandObject.transform.position,
                 transform.position)) < islandNoGoZone)
         {
