@@ -5,6 +5,7 @@ public class ShipSpawner : MonoBehaviour
 {
 	float timer = 0f;
 
+	const float ABSOLUTE_MIN = 3f;
 	[SerializeField]
 	float minDelay = 3f;
 	[SerializeField]
@@ -50,5 +51,8 @@ public class ShipSpawner : MonoBehaviour
 	void SetNextDelay()
 	{
 		timer += UnityEngine.Random.Range(minDelay, maxDelay);
+
+		minDelay = Mathf.Max(ABSOLUTE_MIN, 0.95f * minDelay);
+		maxDelay = Mathf.Max(ABSOLUTE_MIN, 0.95f * maxDelay);
 	}
 }
