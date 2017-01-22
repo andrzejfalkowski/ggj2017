@@ -67,7 +67,7 @@ public class DialogueManager : MonoBehaviour
 			whale1Message.DOText("Cousin Dick said whalers have their port on this island.", "Cousin Dick said whalers have their port on this island.".Length * 0.03f).SetDelay(0.3f).SetId("dialogue");
 			break;
 		case 2:
-			whale1Message.DOText("On of these psychos chased him for days and then stabbed him with giant harpoon.", "Some psycho chased him for days and then stabbed him with giant harpoon.".Length * 0.03f).SetDelay(0.3f).SetId("dialogue");
+			whale1Message.DOText("One of these psychos chased him for days and then stabbed him with giant harpoon.", "Some psycho chased him for days and then stabbed him with giant harpoon.".Length * 0.03f).SetDelay(0.3f).SetId("dialogue");
 			break;
 		case 3:
 			whale2Message.DOText("Bro, that's not cool. Humans are mental.", "Bro, that's not cool. Humans are mental.".Length * 0.03f).SetDelay(0.3f).SetId("dialogue");
