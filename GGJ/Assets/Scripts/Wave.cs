@@ -10,11 +10,16 @@ public class Wave : MonoBehaviour
 
 	float currentRange = 0f;
 
-	const float GROW_SPEED = 50f;
+	[SerializeField]
+	float growSpeed = 50f;
 	const float MAX_RANGE = 100f;
 
-	const float WORLD_MAX_RANGE = 2f;
-	const float WORLD_COLLISION_BUFFER = 0.3f;
+	[SerializeField]
+	float worldMaxRange = 2f;
+	[SerializeField]
+	float worlCollisionBuffer = 0.3f;
+	[SerializeField]
+	float pushForce = 1f;
 
 	private bool initialized = false;
     private Color startingColor;
@@ -41,7 +46,7 @@ public class Wave : MonoBehaviour
 		if(!initialized)
 			return;
 
-		currentRange += Time.deltaTime * GROW_SPEED;
+		currentRange += Time.deltaTime * growSpeed;
 
 		waveSprite.transform.localScale = new Vector3(currentRange/MAX_RANGE, currentRange/MAX_RANGE, 1f);
 		waveSprite.color = new Color(startingColor.r, startingColor.g, startingColor.b,
@@ -68,15 +73,15 @@ public class Wave : MonoBehaviour
 	{
 		float collidingRangeFromCenter = ((Vector2)colliding.transform.localPosition - centerPos).magnitude;
 
-		Debug.DrawLine(centerPos, centerPos + new Vector2(WORLD_MAX_RANGE * (currentRange/MAX_RANGE) - WORLD_COLLISION_BUFFER, 0f));
-		Debug.DrawLine(centerPos, centerPos + new Vector2(0f, WORLD_MAX_RANGE * (currentRange/MAX_RANGE) + WORLD_COLLISION_BUFFER));
+		Debug.DrawLine(centerPos, centerPos + new Vector2(worldMaxRange * (currentRange/MAX_RANGE) - worlCollisionBuffer, 0f));
+		Debug.DrawLine(centerPos, centerPos + new Vector2(0f, worldMaxRange * (currentRange/MAX_RANGE) + worlCollisionBuffer));
 		//Debug.Log("collidingRangeFromCenter " + collidingRangeFromCenter);
-		return ((collidingRangeFromCenter > WORLD_MAX_RANGE * (currentRange/MAX_RANGE) - WORLD_COLLISION_BUFFER) &&
-		        (collidingRangeFromCenter < WORLD_MAX_RANGE * (currentRange/MAX_RANGE) + WORLD_COLLISION_BUFFER));
+		return ((collidingRangeFromCenter > worldMaxRange * (currentRange/MAX_RANGE) - worlCollisionBuffer) &&
+		        (collidingRangeFromCenter < worldMaxRange * (currentRange/MAX_RANGE) + worlCollisionBuffer));
 	}
 
 	public float GetPowerLevel()
 	{
-		return (1f - (currentRange/MAX_RANGE));
+		return (1f - (currentRange/MAX_RANGE)) * pushForce;
 	}
 }

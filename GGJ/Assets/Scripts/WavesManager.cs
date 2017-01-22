@@ -10,6 +10,7 @@ public class WavesManager : MonoBehaviour
 	Transform wavesParent;
 
 	public GameObject WavePrefab;
+	public GameObject SpecialPrefab;
 
 	public List<Wave> Waves;
 
@@ -26,6 +27,15 @@ public class WavesManager : MonoBehaviour
 		go.transform.SetParent(wavesParent);
 		go.transform.localPosition = pos;
 
+		go.GetComponent<Wave>().Init(pos);
+	}
+
+	public void GenerateSpecial(Vector3 pos) 
+	{
+		GameObject go = GameObject.Instantiate(SpecialPrefab);
+		go.transform.SetParent(wavesParent);
+		go.transform.localPosition = pos;
+		
 		go.GetComponent<Wave>().Init(pos);
 	}
 }

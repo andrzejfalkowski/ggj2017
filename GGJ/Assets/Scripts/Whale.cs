@@ -19,6 +19,11 @@ public class Whale : MonoBehaviour
 	public float WaveLoadTime = 1f; 
 
 	[SerializeField]
+	Image specialBar;
+	float currentSpecialLevel = 10f;
+	public float SpecialLoadTime = 10f; 
+
+	[SerializeField]
 	Tail tail;
 
 	public void Init()
@@ -73,16 +78,27 @@ public class Whale : MonoBehaviour
 
 		this.transform.localPosition = pos;
 
-		if(currentPowerLevel >= 1f && (left ? Input.GetKeyDown(KeyCode.Space) : Input.GetKeyDown(KeyCode.Return)))
+		if(currentPowerLevel >= 1f && (left ? Input.GetKeyDown(KeyCode.R) : Input.GetKeyDown(KeyCode.O)))
 		{
 			WavesManager.Instance.GenerateWave(this.transform.localPosition);
 
 			currentPowerLevel = 0f;
 		}
 
+		if(currentSpecialLevel >= 1f && (left ? Input.GetKeyDown(KeyCode.T) : Input.GetKeyDown(KeyCode.P)))
+		{
+			WavesManager.Instance.GenerateSpecial(this.transform.localPosition);
+			
+			currentSpecialLevel = 0f;
+		}
+
 		if(currentPowerLevel < 1f)
 			currentPowerLevel += Time.deltaTime / WaveLoadTime;
 
+		if(currentSpecialLevel < 1f)
+			currentSpecialLevel += Time.deltaTime / SpecialLoadTime;
+
 		powerBar.fillAmount = currentPowerLevel;
+		specialBar.fillAmount = currentSpecialLevel;
 	}
 }
