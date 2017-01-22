@@ -23,10 +23,14 @@ public class GameManager : MonoBehaviour
 
 	[SerializeField]
 	GameObject gameOverScreen;
-	[SerializeField]
-	GameObject newHighScoreScreen;
+    [SerializeField]
+    GameObject newHighScoreScreen;
+    [SerializeField]
+    private HintScreenController hintScreen;
+    private DialogueManager dialogueManager;
 
-	public bool Started = false;
+    public bool paused = false;
+    public bool Started = false;
 	public bool GameOver = false;
 
 	void Awake () 
@@ -36,13 +40,14 @@ public class GameManager : MonoBehaviour
 
 		Instance = this;
 
-		//Init();
-
-		this.gameObject.GetComponent<DialogueManager>().Init();
+        //Init();
+        dialogueManager = this.gameObject.GetComponent<DialogueManager>();
+        dialogueManager.Init();
 	}
 
 	public void Init()
 	{
+        Debug.Log("start");
 		Score = 0;
 		Lives = 5;
 
@@ -51,7 +56,8 @@ public class GameManager : MonoBehaviour
 
 		Started = true;
 
-		ShowHint("Destroy whaler ships before they reach safe port!");
+        //ShowHint("Destroy whaler ships before they reach safe port!");
+        TogglePauseGame(true);
 	}
 
 	public void IncreaseScore()
@@ -105,12 +111,30 @@ public class GameManager : MonoBehaviour
 
 		}
 	}
+
+    private void TogglePauseGame(bool startingGame = false)
+    {
+        paused = !paused;
+        hintScreen.Show(paused, startingGame);
+    }
 	
 	void Update() 
 	{
-		if(!Started || GameOver)
-			return;
-
+        if (!Started || GameOver)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
+            {
+                dialogueManager.SkipAll();
+                TogglePauseGame(true);
+            }
+            return;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
+        {
+            TogglePauseGame();
+            return;
+        }
 		// check for collisions
 		for(int i = 0; i < ShipsManager.Instance.Ships.Count; i++)
 		{

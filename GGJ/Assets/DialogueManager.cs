@@ -23,11 +23,11 @@ public class DialogueManager : MonoBehaviour
 
 	int currentMessage = 0;
 
-	bool storyFinished = false;
+    public bool dialogueOngoing = false;
 
 	public void Init()
 	{
-		storyFinished = false;
+        dialogueOngoing = true;
 
 		currentMessage = 0;
 
@@ -58,20 +58,8 @@ public class DialogueManager : MonoBehaviour
 
 	public void ShowMessage(int message)
 	{
-		//Debug.Log("ShowMessage " + message);
-
 		currentMessage = message;
-
-		whale1Box.SetActive(false);
-		whale2Box.SetActive(false);
-
-		whale1Message.gameObject.SetActive(false);
-		whale2Message.gameObject.SetActive(false);
-
-		DOTween.Kill("dialogue", true);
-
-		whale1Message.text = "";
-		whale2Message.text = "";
+        Clear();
 
 		switch(currentMessage)
 		{
@@ -123,25 +111,53 @@ public class DialogueManager : MonoBehaviour
 				break;
 		}
 		if(currentMessage == 8)
-		{
-			storyFinished = true;
-
-			GameManager.Instance.Init();
-			ShowGameplayObjects(true);
-
-			whale1Box.SetActive(true);
-			whale2Box.SetActive(true);
+        {
+            GameManager.Instance.Init();
+            Stop();
 		}
 	}
 
+    private void Clear()
+    {
+        whale1Box.SetActive(false);
+        whale2Box.SetActive(false);
+
+        whale1Message.gameObject.SetActive(false);
+        whale2Message.gameObject.SetActive(false);
+
+        DOTween.Kill("dialogue", true);
+
+        whale1Message.text = "";
+        whale2Message.text = "";
+    }
+
+    private void Stop()
+    {
+        Debug.Log("stop");
+        dialogueOngoing = false;
+
+        ShowGameplayObjects(true);
+
+        whale1Box.SetActive(true);
+        whale2Box.SetActive(true);
+    }
+
+    public void SkipAll()
+    {
+        Clear();
+        Stop();
+    }
+
 	void Update()
-	{
-		if(storyFinished)
+    {
+        //Debug.Log("dialogue update");
+        if (!dialogueOngoing)
 			return;
 
 		if(Input.anyKeyDown)
-		{
-			ShowNextMessage();
+        {
+            Debug.Log("dialogue skip");
+            ShowNextMessage();
 		}
 	}
 }
