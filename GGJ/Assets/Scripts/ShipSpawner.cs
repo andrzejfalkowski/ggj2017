@@ -16,7 +16,7 @@ public class ShipSpawner : MonoBehaviour
 	{
 		initialized = true;
 
-		SetNextDelay();
+		SetFirstDelay();
 	}
 
 	void Update ()
@@ -40,6 +40,11 @@ public class ShipSpawner : MonoBehaviour
 			SetNextDelay();
 		}
 
+	}
+
+	void SetFirstDelay()
+	{
+		timer += UnityEngine.Random.Range(0f, 2f);
 	}
 
 	void SetNextDelay()

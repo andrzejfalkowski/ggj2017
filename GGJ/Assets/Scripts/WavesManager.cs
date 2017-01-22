@@ -11,8 +11,10 @@ public class WavesManager : MonoBehaviour
 	Transform wavesParent;
 	
 	[SerializeField]
-	GameObject specialEffect;
-	
+	GameObject specialBassEffect;
+	[SerializeField]
+	GameObject specialSmokeEffect;
+
 	public GameObject WavePrefab;
 	public GameObject SpecialBassPrefab;
 	public GameObject SpecialSmokePrefab;
@@ -44,7 +46,7 @@ public class WavesManager : MonoBehaviour
 		go.GetComponent<Wave>().Init(pos);
 
 		DOTween.Kill("special_effet", true);
-		specialEffect.GetComponent<RectTransform>().DOMoveY(6f, 1.2f).From().SetEase(Ease.InSine).SetId("special_effet");
+		specialBassEffect.GetComponent<RectTransform>().DOMoveY(6f, 1.2f).From().SetEase(Ease.InSine).SetId("special_effet");
 
 		DOTween.Kill("punch_camera", true);
 		DOTween.Punch(()=> new Vector3(Camera.main.orthographicSize, 0f, 0f), (v)=> Camera.main.orthographicSize = v.x, new Vector3(-2f, 0f, 0f), 0.7f, 10, 0.5f).SetId("punch_camera");
@@ -57,8 +59,13 @@ public class WavesManager : MonoBehaviour
 		go.transform.localPosition = pos;
 		
 		go.GetComponent<Wave>().Init(pos);
-		
-//		DOTween.Kill("special_effet", true);
+
+		DOTween.Kill("special_effet_smoke", true);
+		specialSmokeEffect.GetComponent<RectTransform>().DOMoveX(-9f, 0.9f).From().SetEase(Ease.InSine).SetId("special_effet_smoke");
+
+		DOTween.Kill("shake_camera", true);
+		Camera.main.DOShakeRotation(0.7f, 10f).SetId("shake_camera");
+		//		DOTween.Kill("special_effet", true);
 //		specialEffect.GetComponent<RectTransform>().DOMoveY(6f, 1.2f).From().SetEase(Ease.InSine).SetId("special_effet");
 //		
 //		DOTween.Kill("punch_camera", true);
