@@ -135,6 +135,8 @@ public class Ship : MonoBehaviour
 		{
 			fading = true;
 
+			other.gameObject.GetComponent<AudioSource>().Play();
+
 			GameManager.Instance.DecreaseLives();
 
 			this.GetComponentInChildren<SpriteRenderer>().DOFade(0f, 2f)

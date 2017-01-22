@@ -20,6 +20,9 @@ public class MainMenuManager : MonoBehaviour {
 
 	[SerializeField]
 	private Text loadingText;
+
+	[SerializeField]
+	AudioSource musicSource;
 	
 	[SerializeField]
 	List<Text> highScores;
@@ -46,6 +49,8 @@ public class MainMenuManager : MonoBehaviour {
         SwitchOffBackgroundAndText();
         whale1.SwimAway(true);
         whale2.SwimAway(false);
+
+		musicSource.DOFade(0f, 2f);
 
         DOVirtual.DelayedCall(2.2f, () => Application.LoadLevel("Gameplay"));
     }

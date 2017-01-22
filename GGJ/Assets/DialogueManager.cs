@@ -54,6 +54,8 @@ public class DialogueManager : MonoBehaviour
 	{
 		currentMessage++;
 		ShowMessage(currentMessage);
+
+		this.GetComponent<AudioSource>().Play();
 	}
 
 	public void ShowMessage(int message)
