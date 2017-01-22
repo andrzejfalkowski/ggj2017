@@ -145,6 +145,7 @@ public class DialogueManager : MonoBehaviour
     {
         Clear();
         Stop();
+        GameManager.Instance.Init();
     }
 
 	void Update()

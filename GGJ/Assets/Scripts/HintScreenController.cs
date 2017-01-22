@@ -19,7 +19,7 @@ public class HintScreenController : MonoBehaviour {
         if (startingGame && Input.anyKeyDown)
         {
             gameObject.SetActive(false);
-            GameManager.Instance.Init();
+            GameManager.Instance.TogglePauseGame();
         }
     }
 }

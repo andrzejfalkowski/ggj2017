@@ -111,10 +111,15 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-    private void TogglePauseGame(bool startingGame = false)
+    public void TogglePauseGame(bool startingGame = false)
     {
         paused = !paused;
         hintScreen.Show(paused, startingGame);
+        if (!Started)
+        {
+            //Init();
+            Started = true;
+        }
     }
 	
 	void Update() 
@@ -124,7 +129,7 @@ public class GameManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
             {
                 dialogueManager.SkipAll();
-                TogglePauseGame(true);
+                //TogglePauseGame(true);
             }
             return;
         }
