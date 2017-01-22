@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour
 
 	public void Init()
 	{
-        Debug.Log("start");
 		Score = 0;
 		Lives = 5;
 
@@ -139,12 +138,21 @@ public class GameManager : MonoBehaviour
 		for(int i = 0; i < ShipsManager.Instance.Ships.Count; i++)
 		{
 			ShipsManager.Instance.Ships[i].HittingWaves = 0;
+			ShipsManager.Instance.Ships[i].SlowedDown = false;
 			for(int j = 0; j < WavesManager.Instance.Waves.Count; j++)
 			{
 				if(WavesManager.Instance.Waves[j].IsCollidingWith(ShipsManager.Instance.Ships[i].gameObject))
 				{
 					//Debug.Log("Hit!");
-					ShipsManager.Instance.Ships[i].HittingWaves++;
+					if(!WavesManager.Instance.Waves[j].IsSmoke)
+					{
+						ShipsManager.Instance.Ships[i].Hit(WavesManager.Instance.Waves[j]);
+						ShipsManager.Instance.Ships[i].HittingWaves++;
+					}
+					else
+					{
+						ShipsManager.Instance.Ships[i].SlowedDown = true;
+					}
 				}
 			}
 			if(ShipsManager.Instance.Ships[i].HittingWaves > 1)

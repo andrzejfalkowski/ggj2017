@@ -97,7 +97,7 @@ public class DialogueManager : MonoBehaviour
 
 				whale1Box.SetActive(true);
 				whale1Message.gameObject.SetActive(true);
-				whale1Box.GetComponent<RectTransform>().DOMoveX(-128f, 0.5f).From().SetId("dialogue");
+				whale1Box.GetComponent<RectTransform>().DOMoveX(-12f, 0.3f).From().SetId("dialogue");
 				break;
 			case 3:
 			case 5:
@@ -107,7 +107,7 @@ public class DialogueManager : MonoBehaviour
 
 				whale2Box.SetActive(true);
 				whale2Message.gameObject.SetActive(true);
-				whale2Box.GetComponent<RectTransform>().DOMoveX(128f, 0.5f).From().SetId("dialogue");
+				whale2Box.GetComponent<RectTransform>().DOMoveX(12f, 0.3f).From().SetId("dialogue");
 				break;
 		}
 		if(currentMessage == 8)
@@ -133,7 +133,6 @@ public class DialogueManager : MonoBehaviour
 
     private void Stop()
     {
-        Debug.Log("stop");
         dialogueOngoing = false;
 
         ShowGameplayObjects(true);
@@ -150,13 +149,11 @@ public class DialogueManager : MonoBehaviour
 
 	void Update()
     {
-        //Debug.Log("dialogue update");
         if (!dialogueOngoing)
 			return;
 
 		if(Input.anyKeyDown)
         {
-            Debug.Log("dialogue skip");
             ShowNextMessage();
 		}
 	}
