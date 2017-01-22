@@ -77,24 +77,36 @@ public class Ship : MonoBehaviour
 	{
 		if(fading || sinking)
 			return;
-
+		
 		sinking = true;
-
+		
 		GameManager.Instance.IncreaseScore();
-
+		
 		this.GetComponent<AudioSource>().Play();
-
+		
 		this.transform.DOScale(new Vector3(0.4f, 0f, 1f), 5f);
 		this.transform.DORotate(new Vector3(0f, 0f, 720f), 5f, RotateMode.FastBeyond360);
 		this.GetComponentInChildren<SpriteRenderer>().DOFade(0f, 5f)
 			.OnComplete(
-			()=>
-			{
+				()=>
+				{
 				if(this.gameObject != null)
 					GameObject.Destroy(this.gameObject);
 			});
-
+		
 		// increase score
+	}
+
+	public void Hit(Wave wave)
+	{
+		//Debug.Log ("Hit");
+		Vector3 direction = (Vector3)wave.centerPos - this.transform.localPosition;
+
+		direction = Vector3.ClampMagnitude(direction, 0.05f * wave.GetPowerLevel());
+	
+		Vector3 pos = this.transform.localPosition - direction;
+		this.transform.localPosition = pos;
+
 	}
 
 	void OnDestroy()

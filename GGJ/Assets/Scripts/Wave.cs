@@ -6,7 +6,7 @@ public class Wave : MonoBehaviour
 	[SerializeField]
 	SpriteRenderer waveSprite;
 
-	Vector2 centerPos;
+	public Vector2 centerPos;
 
 	float currentRange = 0f;
 
@@ -73,5 +73,10 @@ public class Wave : MonoBehaviour
 		//Debug.Log("collidingRangeFromCenter " + collidingRangeFromCenter);
 		return ((collidingRangeFromCenter > WORLD_MAX_RANGE * (currentRange/MAX_RANGE) - WORLD_COLLISION_BUFFER) &&
 		        (collidingRangeFromCenter < WORLD_MAX_RANGE * (currentRange/MAX_RANGE) + WORLD_COLLISION_BUFFER));
+	}
+
+	public float GetPowerLevel()
+	{
+		return (1f - (currentRange/MAX_RANGE));
 	}
 }

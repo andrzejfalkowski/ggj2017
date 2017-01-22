@@ -120,6 +120,7 @@ public class GameManager : MonoBehaviour
 				if(WavesManager.Instance.Waves[j].IsCollidingWith(ShipsManager.Instance.Ships[i].gameObject))
 				{
 					//Debug.Log("Hit!");
+					ShipsManager.Instance.Ships[i].Hit(WavesManager.Instance.Waves[j]);
 					ShipsManager.Instance.Ships[i].HittingWaves++;
 				}
 			}
